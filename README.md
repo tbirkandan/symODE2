@@ -4,6 +4,8 @@ by Tolga Birkandan
 E-mail: birkandant@itu.edu.tr
 Department of Physics, Istanbul Technical University, 34469 Istanbul, Turkey.
 
+Please see https://arxiv.org/abs/2010.01563 for details.
+
 An open-source package for symbolic analysis of second-order ordinary differential equations with polynomial coefficients is proposed. The approach is mainly based on the singularity structure of the equation and the routines are written under the open-source computer algebra system SageMath. The code is able to obtain the singularity structure, indices and recurrence relations associated with the regular singular points, and symbolic solutions of the hypergeometric equation, Heun equation, and their confluent forms.
 
 The symODE2 package is written under SageMath 9.1 using a laptop computer with Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz and 8 GB memory. The operating system is Windows 10 Enterprise ver.1909.
