@@ -22,7 +22,7 @@ The ﬁrst part, ode2analyzer contains the routines,
 
 * find_indices_recurrence(diffeqn,y,z,point,index,operation): Finds the indices and/or the recurrence relation with respect to a regular singular point using the theta-operator method.
 
-* ode_change_of_variable(diffeqn,y,z,transformation): Performs a change of variables.
+* ode_change_of_variable(diffeqn,y,z,newvar,transformation): Performs a change of variables.
 
 * normal_form_ode2(diffeqn,y,z): Finds the normal form of a second order ODE. 
 
@@ -39,6 +39,8 @@ Here, the input arguments are
 − index: The name of the parameter that will be used for the characteristic exponent.
 
 − operation: The result of the routine (indices, recurrence, full (both)).
+
+− newvar: The new variable.
 
 − transformation: The transformation function that deﬁnes the change of variables.
 
@@ -72,7 +74,4 @@ The polynomial coefficients of the normal forms are matched in the conﬂuent ca
 
 We ﬁnd the parameters with this method and use the Maple or Mathematica forms of the solutions to substitute these parameters. The hypergeometric equation has three pairs of Frobenius solutions around its three regular singular points and these solutions can be transformed into other solutions via speciﬁc transformations. The number of all solutions of the hypergeometric equation is 24. The number of total solutions is 192 for the general Heun equation. The user of our code may need to use some transformations or function identities in order to obtain the desired form of the solution.
 
-The results of the hypergeometric and conﬂuent hypergeometric equations are numerically usable as these functions are deﬁned in SageMath. However, the numerical solutions of the Heun-type functions are not deﬁned. The numerical solutions of the general Heun and (singly) conﬂuent Heun functions are deﬁned by Motygin for GNU Octave/MATLAB. GNU Octave/MATLAB commands can be run in a SageMath session. However, this procedure is not straightforward and it is beyond the scope of this work.
-
-**Regarding our code, although the results of our limited number of tests seem proper, it should be emphasized that the solutions should be taken with great care as such routines should be tested heavily before using them for new problems. The user should approach these routines as an experimental eﬀort and follow the updates from the
-GitHub page regularly.**
+The results of the hypergeometric and conﬂuent hypergeometric equations are numerically usable as these functions are deﬁned in SageMath. However, the numerical solutions of the Heun-type functions are not deﬁned. The numerical solutions of the general Heun and (singly) conﬂuent Heun functions are deﬁned by Motygin for GNU Octave/MATLAB. GNU Octave/MATLAB commands can be run in a SageMath session. However, this procedure is not straightforward and it is beyond the scope of this work. The method given in arXiv:2010.03919 [math-ph] can also be employed in order to obtain numerical results.
