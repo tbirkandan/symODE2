@@ -28,12 +28,14 @@ def normal_form_ode2(diffeqn,y,z):
     return diff(y(z),z,z)+derless*y(z)
 
 ####################################################################
-def ode_change_of_variable(diffeqn,y,z,transformation):
+def ode_change_of_variable(diffeqn,y,z,newvar,transformation):
     # This function transforms the 2nd order ode as z->z'(z)
     # diffeqn: The differential equation to be analyzed
     # y: The dependent function
     # z: The argument of y
     # transformation: transformation formula
+    
+    transformation=transformation.subs(newvar==z)
 
     f1 = function('f1')(z) #f1*y''+f2*y'+f3*y=0
     f2 = function('f2')(z) #f1*y''+f2*y'+f3*y=0
@@ -49,7 +51,31 @@ def ode_change_of_variable(diffeqn,y,z,transformation):
     f2(z)=simplify_fullfull((f2(z)*(diff(transformation, z))^2-f1(z)*(diff(transformation, z, z)))/(diff(transformation, z))^3)
     f1(z)=simplify_fullfull(f1(z)/(diff(transformation, z))^2)
                             
-    return f1(z)*diff(y(z),z,z)+f2(z)*diff(y(z),z)+f3(z)*y(z)
+    return (f1(z)*diff(y(z),z,z)+f2(z)*diff(y(z),z)+f3(z)*y(z)).subs(z==newvar)
+
+####################################################################
+#def (diffeqn,y,z,transformation):
+#    # This function transforms the 2nd order ode as z->z'(z)
+#    # diffeqn: The differential equation to be analyzed
+#    # y: The dependent function
+#    # z: The argument of y
+#    # transformation: transformation formula
+#
+#    f1 = function('f1')(z) #f1*y''+f2*y'+f3*y=0
+#    f2 = function('f2')(z) #f1*y''+f2*y'+f3*y=0
+#    f3 = function('f3')(z) #f1*y''+f2*y'+f3*y=0
+#    f1(z)=diffeqn.coefficient(diff(y(z),z,z))
+#    f2(z)=diffeqn.coefficient(diff(y(z),z))
+#    f3(z)=diffeqn.coefficient(y(z))
+#    
+#    #Apply the transformation to the equation
+#    f1(z)=f1(z).subs(z==transformation)
+#    f2(z)=f2(z).subs(z==transformation)
+#    f3(z)=simplify_fullfull(f3(z).subs(z==transformation))
+#    f2(z)=simplify_fullfull((f2(z)*(diff(transformation, z))^2-f1(z)*(diff(transformation, z, z)))/(diff(transformation,z))^3)
+#    f1(z)=simplify_fullfull(f1(z)/(diff(transformation, z))^2)
+#                            
+#    return f1(z)*diff(y(z),z,z)+f2(z)*diff(y(z),z)+f3(z)*y(z)
             
 ####################################################################
 def find_indices_recurrence(diffeqn,y,z,point,index,operation):

@@ -66,25 +66,18 @@ def find_special_ode(diffeqn,y,z):
     # will be attempted.)
     if numregular==3 and numirregular==0:
         oderesult=find_2F1(diffeqn,y,z)
-        show(oderesult)
     elif numregular==1 and numirregular==1 and sing_struct[3][0]==1:
         oderesult=find_1F1(diffeqn,y,z)
-        show(oderesult)
     elif numregular==4 and numirregular==0:
         oderesult=find_HG(diffeqn,y,z)
-        show(oderesult)
     elif numregular==2 and numirregular==1 and sing_struct[3][0]==1:
         oderesult=find_HC(diffeqn,y,z)
-        show(oderesult)
     elif numregular==1 and numirregular==1 and sing_struct[3][0]==2:
         oderesult=find_HB(diffeqn,y,z)
-        show(oderesult)
     elif numregular==0 and numirregular==1 and sing_struct[3][0]==3:
         oderesult=find_HT(diffeqn,y,z)
-        show(oderesult)
     elif numregular==0 and numirregular==2 and sing_struct[3][0]==1 and sing_struct[3][1]==1:
         oderesult=find_HD(diffeqn,y,z)
-        show(oderesult)
     else:
         show("No special form is found")
         oderesult=NaN
@@ -108,7 +101,7 @@ def ode_finder_bruteforce(diffeqn,y,z):
     for ii in exponents:
         show("Try (",counter,"):")
         show("Trying for z->z**(",ii,")")
-        diffeqn2=ode_change_of_variable(diffeqn=diffeqn,y=y,z=z,transformation=z^ii)
+        diffeqn2=ode_change_of_variable(diffeqn,y,z,z,z^ii)
         try:
             find_special_ode(diffeqn=diffeqn2,y=y,z=z)
         except:
@@ -176,7 +169,7 @@ def find_HT(diffeqn,y,z):
         mytransformation=(x11*z)/(z+1)
         mytransformation=mytransformation.limit(x11=mystructure[2][0])
         newvariable=solve(mytransformation==bb,z)[0].rhs().subs(bb==z)
-        diffeqn=ode_change_of_variable(diffeqn,y,z,mytransformation)
+        diffeqn=ode_change_of_variable(diffeqn,y,z,z,mytransformation)
     
     mystructure=find_singularities(diffeqn,y,z)   
     
@@ -252,7 +245,7 @@ def find_HB(diffeqn,y,z):
         mytransformation=mytransformation.limit(x11=mystructure[2][0])
         mytransformation=mytransformation.limit(x22=mystructure[0][0])
         newvariable=solve(mytransformation==bb,z)[0].rhs().subs(bb==z)
-        diffeqn=ode_change_of_variable(diffeqn,y,z,mytransformation)
+        diffeqn=ode_change_of_variable(diffeqn,y,z,z,mytransformation)
     
     mystructure=find_singularities(diffeqn,y,z) 
     
@@ -326,7 +319,7 @@ def find_HD(diffeqn,y,z):
         mytransformation=mytransformation.limit(x11=mystructure[2][1])
         mytransformation=mytransformation.limit(x22=mystructure[2][0])
         newvariable=solve(mytransformation==bb,z)[0].rhs().subs(bb==z)
-        diffeqn=ode_change_of_variable(diffeqn,y,z,mytransformation)
+        diffeqn=ode_change_of_variable(diffeqn,y,z,z,mytransformation)
     
     mystructure=find_singularities(diffeqn,y,z)   
     
@@ -405,7 +398,7 @@ def find_HC(diffeqn,y,z):
         mytransformation=mytransformation.limit(x11=mystructure[0][1])
         mytransformation=mytransformation.limit(x22=mystructure[0][0])
         newvariable=solve(mytransformation==bb,z)[0].rhs().subs(bb==z)
-        diffeqn=ode_change_of_variable(diffeqn,y,z,mytransformation)
+        diffeqn=ode_change_of_variable(diffeqn,y,z,z,mytransformation)
     
     mystructure=find_singularities(diffeqn,y,z)   
     
@@ -490,7 +483,7 @@ def find_HG(diffeqn,y,z):
         #show(mytransformation)
         newvariable=solve(mytransformation==bb,z)[0].rhs().subs(bb==z)
         #show(newvariable)
-        diffeqn=ode_change_of_variable(diffeqn,y,z,mytransformation)
+        diffeqn=ode_change_of_variable(diffeqn,y,z,z,mytransformation)
     
     mystructure=find_singularities(diffeqn,y,z)   
 
@@ -567,7 +560,7 @@ def find_1F1(diffeqn,y,z):
         mytransformation=mytransformation.limit(x11=mystructure[2][0])
         mytransformation=mytransformation.limit(x22=mystructure[0][0])
         newvariable=solve(mytransformation==bb,z)[0].rhs().subs(bb==z)
-        diffeqn=ode_change_of_variable(diffeqn,y,z,mytransformation)
+        diffeqn=ode_change_of_variable(diffeqn,y,z,z,mytransformation)
     
     f1(z)=diffeqn.coefficient(diff(y(z),z,z))
     f2(z)=((diffeqn.coefficient(diff(y(z),z)))/f1(z)).full_simplify()
@@ -584,7 +577,7 @@ def find_1F1(diffeqn,y,z):
     coef0=diffeqn.expand().coefficient(y(z)).coefficient(z,0)
     newvariable=newvariable.subs(z==(2*sqrt(coef0)*z)/I)
     
-    diffeqn=ode_change_of_variable(diffeqn,y,z,(I*z)/(2*sqrt(coef0)))    
+    diffeqn=ode_change_of_variable(diffeqn,y,z,z,(I*z)/(2*sqrt(coef0)))    
     diffeqn=(diffeqn/diffeqn.coefficient(diff(y(z),z,z))).expand()
     
     coef0=diffeqn.expand().coefficient(y(z)).coefficient(z,0)
@@ -628,7 +621,7 @@ def find_2F1(diffeqn,y,z):
         mytransformation=mytransformation.limit(x11=mystructure[0][1])
         mytransformation=mytransformation.limit(x22=mystructure[0][0])
         newvariable=solve(mytransformation==bb,z)[0].rhs().subs(bb==z)
-        diffeqn=ode_change_of_variable(diffeqn,y,z,mytransformation)
+        diffeqn=ode_change_of_variable(diffeqn,y,z,z,mytransformation)
     
     mystructure=find_singularities(diffeqn,y,z)
         
