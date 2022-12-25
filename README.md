@@ -6,4 +6,4 @@ E-mail: birkandant@itu.edu.tr
 
 Department of Physics, Istanbul Technical University, 34469 Istanbul, Turkey.
 
-Please see [the user manual (PDF)](https://github.com/tbirkandan/symODE2/blob/main/symode2_user_manual.pdf) and https://arxiv.org/abs/2010.01563 for details.
+Please see [the user manual (PDF)](https://github.com/tbirkandan/symODE2/blob/main/symode2_user_manual.pdf) and https://arxiv.org/abs/2010.01563 (or https://dergipark.org.tr/tr/pub/tjmcs/issue/74092/1025121) for details.
